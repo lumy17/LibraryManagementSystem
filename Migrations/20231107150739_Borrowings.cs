@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Moldovan_Luminita_Lab2.Migrations
 {
-    public partial class BookCategory : Migration
+    public partial class Borrowings : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

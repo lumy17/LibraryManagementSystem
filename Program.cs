@@ -1,12 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Moldovan_Luminita_Lab2.Data;
+using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<Moldovan_Luminita_Lab2Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Moldovan_Luminita_Lab2Context") ?? throw new InvalidOperationException("Connection string 'Moldovan_Luminita_Lab2Context' not found.")));
+
+builder.Services.AddDbContext<LibraryIdentityContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("Moldovan_Luminita_Lab2Context")
+?? throw new InvalidOperationException("Connection string 'Moldovan_Luminita_lab2Context' not found")));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<Moldovan_Luminita_Lab2Context>();
 
 var app = builder.Build();
 
@@ -22,6 +30,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
 

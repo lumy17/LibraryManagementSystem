@@ -12,8 +12,8 @@ using Moldovan_Luminita_Lab2.Data;
 namespace Moldovan_Luminita_Lab2.Migrations
 {
     [DbContext(typeof(Moldovan_Luminita_Lab2Context))]
-    [Migration("20231027105910_BookCategory")]
-    partial class BookCategory
+    [Migration("20231107150739_Borrowings")]
+    partial class Borrowings
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -138,7 +138,7 @@ namespace Moldovan_Luminita_Lab2.Migrations
             modelBuilder.Entity("Moldovan_Luminita_Lab2.Models.Book", b =>
                 {
                     b.HasOne("Moldovan_Luminita_Lab2.Models.Author", "Author")
-                        .WithMany()
+                        .WithMany("Books")
                         .HasForeignKey("AuthorID");
 
                     b.HasOne("Moldovan_Luminita_Lab2.Models.Publisher", "Publisher")
@@ -167,6 +167,11 @@ namespace Moldovan_Luminita_Lab2.Migrations
                     b.Navigation("Book");
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Moldovan_Luminita_Lab2.Models.Author", b =>
+                {
+                    b.Navigation("Books");
                 });
 
             modelBuilder.Entity("Moldovan_Luminita_Lab2.Models.Book", b =>
